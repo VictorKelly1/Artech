@@ -1,0 +1,10 @@
+build/
+.cache/
+compile_commands.json
+*.data
+*.data.old
+perf.data*
+# Archivos ITCH: pesan GB, nunca al repo
+data/
+*.itch
+*.gz
