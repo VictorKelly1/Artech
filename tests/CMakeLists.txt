@@ -8,7 +8,7 @@ function(artech_add_test name)
     target_link_libraries(${name} PRIVATE artech_options GTest::gtest_main)
 
     if(ARTECH_SANITIZER STREQUAL "thread")
-        # El runtime de TSan de GCC 13 falla con la aleatoriedad de ASLR de los
+        # El runtime de TSan de GCC (13 y 14) falla con la aleatoriedad de ASLR de los
         # kernels recientes ("unexpected memory mapping"). `setarch -R` lanza el
         # test con ASLR desactivado solo para ese proceso.
         set_target_properties(${name} PROPERTIES

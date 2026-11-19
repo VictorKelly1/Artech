@@ -63,8 +63,8 @@ Ambas comparten las estructuras del order book.
 - Por encima: especificaciones de ITCH 5.0, OUCH, SoupBinTCP y MoldUDP64.
 
 **Hacer**
-- ~~Toolchain: CMake, GCC con C++23, GoogleTest, Google Benchmark, sanitizers (ASan, UBSan, TSan), `perf`, repositorio con CI.~~ Hecho el 17 nov (presets debug/release/asan/tsan/ci). Falta: primer commit, repo en GitHub y primera corrida de CI.
-- Descargar un archivo ITCH histórico de NASDAQ y escribir un contador de mensajes desechable.
+- ~~Toolchain: CMake, GCC con C++23, GoogleTest, Google Benchmark, sanitizers (ASan, UBSan, TSan), `perf`, repositorio con CI.~~ Hecho el 17 nov (presets debug/release/asan/tsan/ci). Primer commit, repo en GitHub y primer CI en verde el 18 nov. Cambio a GCC 14 el 18 nov.
+- Descargar un archivo ITCH histórico de NASDAQ (elegido: `12302019.NASDAQ_ITCH50.gz`, 3.5 GB, de emi.nasdaq.com) y escribir un contador de mensajes desechable.
 - Registrar la línea base de la máquina: governor, boost, topología de núcleos.
 
 ## Mes 1 (enero) — Memoria, contenedores, medición y `perf` básico
@@ -176,6 +176,7 @@ Ambas comparten las estructuras del order book.
 ## Ritmo de trabajo
 
 - Cada semana: ~30% estudio, 60% código, 10% escritura.
+- Bitácora en `docs/BITACORA.md`: se anota cada decisión, medición, bug y aprendizaje en el momento, no al final.
 - Inicio de mes: sesión de diseño antes de escribir código.
 - Fin de mes: revisión de código, reporte de mediciones y un post.
 
@@ -198,12 +199,11 @@ Ambas comparten las estructuras del order book.
 - **Loopback no es una red.** No hay NIC ni interrupciones, y no pierde ni reordena paquetes. Los números se llaman "latencia del stack del kernel", y los huecos se prueban con veth + `tc netem`.
 - **`isolcpus` en un escritorio.** Mantener una entrada de arranque separada para medir.
 - **Tamaño de línea de caché.** GCC avisa al usar `hardware_destructive_interference_size`; fijar 64.
-- **TSan con GCC 13 en kernels recientes.** Falla con "unexpected memory mapping"; los tests corren con `setarch -R` (ya integrado en `artech_add_test`).
+- **TSan con GCC 13/14 en kernels recientes.** Falla con "unexpected memory mapping"; los tests corren con `setarch -R` (ya integrado en `artech_add_test`).
 
 ## Decisiones pendientes
 
 - SHA-1 y Base64 para el handshake de WebSocket: implementarlos a mano o permitir una librería.
-- Pasar de GCC 13 a GCC 14 (`sudo apt install g++-14`): soporte más completo de C++23.
 - Proveedor de VPS y dominio.
 
 ## Recursos
